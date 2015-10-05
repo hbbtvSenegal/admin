@@ -1,0 +1,35 @@
+<?php
+    session_start();
+if(isset($_POST['login']) && isset($_POST['password'])){
+    $name=$_POST['login'];
+    $pass=$_POST['password'];
+    require("connexion.php");   
+    $requ = $bdd->prepare('SELECT count(*) FROM admin WHERE login = ? and password= ?');
+    $requ->execute(array($name,$pass));
+    $cn = $requ->fetchAll();
+    if($cn[0][0]!=0){
+        $_SESSION['nom'] = $name;
+        require("accueil.html");
+   
+    }
+    else{
+        ?>
+        <div class="alert">
+            <button class="close" data-dismiss="alert">&times;</button>
+            <strong>Warning!</strong> Login ou Mot de passe incorrect.
+        </div><?php
+    }
+        
+}
+else{
+    ?>
+        <div class="alert">
+            <button class="close" data-dismiss="alert">&times;</button>
+            <strong>Warning!</strong> Vérifier les valeurs entrées.
+        </div><?php
+
+ } ?>
+
+
+
+
