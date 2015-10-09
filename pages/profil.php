@@ -17,7 +17,9 @@ require("connexion.php");
         $lieu=$reponse["lieu"];
        
     }
-        
+if(_SESSION['nom'])
+{
+
 ?>
 
 <!DOCTYPE html>
@@ -271,3 +273,11 @@ require("connexion.php");
 </body>
 
 </html>
+<?php 
+}
+else
+{
+
+header('location:index.html');
+}
+?>

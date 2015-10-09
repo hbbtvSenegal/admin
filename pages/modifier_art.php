@@ -4,7 +4,7 @@ require("connexion.php");
 $code=$_GET["code"];
 $_SESSION['code']=$code;
 
-    $req=$bdd->prepare("SELECT * FROM articles  where titre=:code");
+    $req=$bdd->prepare("SELECT * FROM articles  where id_article=:code");
     $req->execute(array("code"=>$code));
     if($reponse=$req->fetch())
      {
@@ -73,7 +73,7 @@ $_SESSION['code']=$code;
             </div>
             <!-- /.navbar-header -->
 
-            
+           <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -127,7 +127,7 @@ $_SESSION['code']=$code;
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="#"><i class="fa fa-shopping-cart"></i> Vente en ligne <span class="fa arrow"></span></a>
+                            <a href="#"><i class="fa fa-shopping-cart"></i><center> Vente en ligne </center><span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
                                     <a href="upload_img.php"><i class="fa fa-edit fa-fw"></i>Ajouter</a>
@@ -179,10 +179,7 @@ $_SESSION['code']=$code;
                                             <label>Titre</label>
                                             <input type="text" name="titre" value="<?php echo $titre;?>"  class="form-control" required>
                                         </div>
-                                        <div class="form-group">
-                                            <label>Lien</label>
-                                            <input type="text" name="lien" value="<?php echo $lien;?>"  class="form-control" required>
-                                        </div>
+                    
                                         
                                         <div class="form-group">
                                             <label>Prix</label>
@@ -190,8 +187,8 @@ $_SESSION['code']=$code;
                                         </div>
                                              
                                         <div align="center">
-                                        <button type="submit" class="btn btn-outline btn-primary">Valider</button>
-                                        <a href="#"><button class="btn btn-outline btn-warning"> Initialiser   </button></a>
+                                        <button type="submit" class="btn btn-outline btn-primary" onclick="return confirm('Voulez-vous vraiment supprimer!!!') ">Valider</button>
+                                        <a href="liste_article.php"><button  class="btn btn-outline btn-warning"> Annuler  </button></a>
                                         </div>                                     
                 </form>
             

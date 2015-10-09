@@ -8,7 +8,8 @@ require("connexion.php");
     $requ1 = $bdd->prepare('SELECT count(*) FROM vod ');
     $requ1->execute();
     $nb = $requ1->fetchAll();
-
+if($_SESSION['nom'])
+{
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -241,3 +242,12 @@ require("connexion.php");
 </body>
 
 </html>
+<?php 
+}
+else
+{
+
+ header('location:index.html');   
+}
+
+?>

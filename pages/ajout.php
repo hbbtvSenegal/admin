@@ -1,5 +1,7 @@
 <?php
     session_start();
+if($_SESSION['nom'])
+  {  
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -170,24 +172,20 @@
                                             <input type="hidden" name="MAX_FILE_SIZE" value="1000000000">
                                         <div class="form-group">
                                             <label>Titre</label>
-                                            <input type="text" name="title" class="form-control">
+                                            <input type="text" name="title" class="form-control" required>
                                         </div>
                                         <div class="form-group">
                                             <label>Vidéo</label>
-                                            <input type="file" name="nom_du_fichier" >
-                                        </div>
-					<div class="form-group">
-                                            <label>URL</label><br>
-                                            <input type="url" name="src" >
-                                        </div>
+                                            <input type="file" name="nom_du_fichier" required >
+                                        
                                         <div class="form-group">
                                             <label>Présentation</label>
                                             <textarea type="textarea" name="description" class="form-control" rows="3"></textarea>
                                         </div>
-					<div align="center">
-                                        <button type="submit" class="btn btn-outline btn-primary">Envoyer</button>
-                                        <button type="reset" class="btn btn-outline btn-warning"> Initialiser   </button>
-					</div>
+					                   <div align="center">
+                                            <button type="submit" class="btn btn-outline btn-primary">Envoyer</button>
+                                            <button type="reset" class="btn btn-outline btn-warning"> Initialiser   </button>
+					                   </div>
                                     </form>
                                 </div>
                                 <!-- /.col-lg-6 (nested) -->
@@ -255,3 +253,11 @@
 </body>
 
 </html>
+<?php
+}
+else
+{
+
+  header('location:index.html');  
+}
+?>

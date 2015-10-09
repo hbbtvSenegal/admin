@@ -7,5 +7,6 @@ if($req){
 	header('location:liste_article.php');
 	exit();
 }
+
 $req->closeCursor();
 ?>

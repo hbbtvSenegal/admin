@@ -1,10 +1,10 @@
 <?php
+
      $fichier = $_FILES['nom_du_fichier'];
-    $dir = "/home/khalifa/Bureau/";
-    $extensions_valides = array( 'jpg' , 'jpeg' , 'gif' , 'png', 'swf' , 'flv' ,
- 'avi' , 'mov' , 'mpg' , 'mpeg' , 'xvid' , 'divx' , 'mkv','mp4');
-    $maxsize=FALSE;// taille maximale
-    $max_width = 0;
+    $dir = "../../psehbbtv/media/video/";
+    $extensions_valides = array(  'swf' , 'flv' , 'avi' , 'mov' , 'mpeg', 'mkv','mp4','png');
+    $maxsize    = FALSE;// taille maximale
+    $max_width  = 0;
     $max_height = 0;
     //$id=0;
     
@@ -22,8 +22,10 @@
         {
             ?><script type = "text/javascript">
                  res = alert('taille limite');
-                </script><?php
-                require("ajout.php");
+                 //document.location.href='ajout.php';
+                </script>
+            <?php
+               require("ajout.php");
             return FALSE;
         }
     //Test3: limite des dimensions de l'image
@@ -38,6 +40,7 @@
         {   
             ?><script type = "text/javascript">
                  res = alert('taille des dimensions');
+                 //document.location.href='ajout.php';
                 </script><?php
                 require("ajout.php");
             return FALSE;
@@ -65,20 +68,21 @@
         //echo $fichier['name'];
     	$title = $_POST["title"];
 		$video = $fichier['name'];
-		$src = $_POST["src"];
+		//$src = $_POST["src"];
 		$description = $_POST["description"];
         ?><script type = "text/javascript">
                  res = alert("le fichier a été bien enregisté");
+                 //document.location.href='ajout.php';
                 </script><?php
                 require("ajout.php");
 		//print_r($_FILES);
 
             require("connexion.php");
-        $requ = $bdd->prepare("INSERT INTO vod VALUES (?, ?, ?, ?,?)");
-        $requ->execute(array("",$title, $src,$description,$video));
+        $requ = $bdd->prepare("INSERT INTO vod VALUES (?, ?, ?,?)");
+        $requ->execute(array("",$title,$description,$video));
 
-        $req1=$bdd->prepare("SELECT id FROM vod  where title=:title and video=:video and src=:src and description=:description");
-        $req1->execute(array("title"=>$title,"video"=>$video,"src"=>$src,"description"=>$description));
+        $req1=$bdd->prepare("SELECT id FROM vod  where title=:title and video=:video and description=:description");
+        $req1->execute(array("title"=>$title,"video"=>$video,"description"=>$description));
         if($reponse1=$req1->fetch())
      {
         $id=$reponse1["id"];
@@ -89,7 +93,6 @@
             $data = array();
             $data["id"] = $id;
             $data["title"]  = $title;
-            $data["src"]  = $src;
             $data["description"] = $description;
             $data["video"] = $video;
             $data1 = json_encode( $data );
@@ -105,9 +108,13 @@
 
 
     else{
-        ?><script type = "text/javascript">
+        ?>
+           <script type = "text/javascript">
                  res = alert"Erreur lors de l'enregistrement du fichier");
-                </script><?php
+                 //document.location.href='ajout.php';   
+            </script>
+
+        <?php
                 require("ajout.php");
         }
 ?>

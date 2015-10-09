@@ -1,5 +1,7 @@
 <?php
     session_start();
+
+
 if(isset($_POST['login']) && isset($_POST['password'])){
     $name=$_POST['login'];
     $pass=$_POST['password'];
@@ -20,8 +22,9 @@ if(isset($_POST['login']) && isset($_POST['password'])){
     else{?>
        <script type = "text/javascript">
         res = alert('Login ou Mot de passe incorrect');
+       // document.location.href:'index.html';
        </script><?php
-       require("index.html");
+      require("index.html");
     }
         
 }
@@ -29,10 +32,13 @@ else{
     ?>
         <script type = "text/javascript">
         res = alert('Vérifier les données SVP');
+         // document.location.href:'index.html';
        </script><?php
        require("index.html");
 
- } ?>
+ } 
+
+ ?>
 
 
 

@@ -13,8 +13,10 @@ function upload($bdd,$index,$destination,$extension=false,$max_size=false,$size=
 	   	?>
        <script type = "text/javascript">
         res = alert('Une erreur est survenue lors de l upload');
-       </script><?php
-       	require("ajout_article.php");
+        document.location.href='ajout_article.php';
+       </script>
+       <?php
+       	//header('location:ajout_article.php');
 		return false;   
 	   }
 	   
@@ -25,8 +27,9 @@ function upload($bdd,$index,$destination,$extension=false,$max_size=false,$size=
 		{?>
 		<script type = "text/javascript">
         res = alert('l extension n est pas compatible');
+        document.location.href='ajout_article.php';
        </script><?php
-       	require("ajout_article.php");
+       	  //header('location:ajout_article.php');
 		 return  false;
 		} 
 	  
@@ -35,8 +38,9 @@ function upload($bdd,$index,$destination,$extension=false,$max_size=false,$size=
 		{
 			?><script type = "text/javascript">
         res = alert('la taille du fichier est trop grande');
+        document.location.href='ajout_article.php';
        </script><?php
-       	require("ajout_article.php");
+       	//header('location:ajout_article.php');
 		 return false; 	
 		}
 			
@@ -44,11 +48,14 @@ function upload($bdd,$index,$destination,$extension=false,$max_size=false,$size=
 	  $dimension=getimagesize($_FILES[$index]["tmp_name"]);
 	  if($dimension[0]>$size[0] || $dimension[1]>$size[1])
 		{
-			?><script type = "text/javascript">
-        res = alert('les dimensions sont trop elevees ');
-       </script><?php
-       	require("ajout_article.php");
-		 return false;
+			?>
+		<script type = "text/javascript">
+        	res = alert('les dimensions sont trop elevees ');
+        	document.location.href='ajout_article.php';
+       </script>
+       <?php
+        	//header('location:ajout_article.php');
+		    return false;
 		}
 		
 	   //le mt_rand(1,1000) permet d'eviter d'avoir de doublons d'image
@@ -67,10 +74,13 @@ function upload($bdd,$index,$destination,$extension=false,$max_size=false,$size=
 		 }
 	else
 			{
-				?><script type = "text/javascript">
+				?>
+				<script type = "text/javascript">
        			 res = alert('erreur d insertion dans la base');
-          		</script><?php
-       			require("ajout_article.php");
+       			 document.location.href='ajout_article.php';
+          		</script>
+          		<?php
+       			//header('location:ajout_article.php');
 	
 				echo $bdd;
 				return false;
@@ -81,12 +91,15 @@ function upload($bdd,$index,$destination,$extension=false,$max_size=false,$size=
 
 if(!empty($_POST['submit']))
 	{
-		if(upload($bdd,"img","/home/khalifa/Bureau/",array("png","jpg"),102400,array(300,300) )==1)
+		if(upload($bdd,"img","../../siteDeVente/static/image/",array("png","jpg"),1024000000,array(300,300) )==1)
 		{
-			?><script type = "text/javascript">
-        res = alert('fichier bien uploader');
-       </script><?php
-       require("ajout_article.php");
+		?>
+		<script type = "text/javascript">
+        	res = alert('fichier bien uploader');
+        	document.location.href='ajout_article.php';
+       </script>
+       <?php
+       //header('location:ajout_article.php');
 		}
 	}
 //requte d'affichage d'image

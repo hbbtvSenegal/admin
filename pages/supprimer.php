@@ -1,9 +1,33 @@
 <?php 
 require ("connexion.php");
+?>
 
-$code=$_GET["code"];
-$req=$bdd->prepare("DELETE  FROM vod where video = :code");
-$req->execute(array( "code" => $code ));
+
+<script type="text/javascript">
+
+        var supp=confirm('veuillez confimer');
+        if(supp==true)
+            {
+              <?php
+              
+              $code=$_GET["code"];
+              $req=$bdd->prepare("DELETE  FROM vod where video = :code");
+              $req->execute(array( "code" => $code ));
+
+              ?>
+
+              alert("fichier supprimer avec succes ");  
+              document.location.href='liste.php';
+            }
+        else
+           {
+            document.location.href='liste.php';
+           }   
+
+</script>
+
+
+<?php
 
 $requ1 = $bdd->prepare('SELECT count(*) FROM vod ');
 $requ1->execute();
@@ -35,6 +59,6 @@ while($reponse=$requ3->fetch())
     fclose($monfichier);**/
 	header('location:liste.php');
 	exit();
-}
-$req->closeCursor();
+
+   $req->closeCursor();
 ?>

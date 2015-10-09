@@ -1,5 +1,7 @@
 <?php
     //session_start();
+if($_SESSION['nom'])
+{ 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -173,3 +175,10 @@
 </body>
 
 </html>
+<?php 
+}
+else
+{
+ header('location:index.html');   
+}
+?>

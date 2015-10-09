@@ -1,8 +1,10 @@
 <?php
     session_start();
 require("connexion.php");   
-    $requ = $bdd->prepare('SELECT titre,lien,prix FROM articles ');
+    $requ = $bdd->prepare('SELECT * FROM articles ');
     $requ->execute();
+if($_SESSION['nom'])
+{    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -15,10 +17,11 @@ require("connexion.php");
     <meta name="description" content="">
     <meta name="author" content="">
 
+
     <title>HbbTV_liste des articles</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
 
     <!-- MetisMenu CSS -->
     <link href="../bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
@@ -45,7 +48,7 @@ require("connexion.php");
 </head>
 
 <body>
-
+    
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -195,6 +198,7 @@ require("connexion.php");
                                         
                                             while($reponse=$requ->fetch())
                                             {
+   
                                             ?>
 
                                         <tr class="odd gradeX">
@@ -202,9 +206,10 @@ require("connexion.php");
                                           <td><?php echo ($reponse["titre"]); ?></td>
                                           <td><?php echo ($reponse["lien"]); ?></td>
                                           <td><?php echo ($reponse["prix"]); ?></td>
-                                          <td><a href="modifier_art.php?code=<?php echo $reponse["titre"];?>" > <button class="btn btn-info btn-circle btn-lg"> <i class="fa fa-check"></i></button></a>
-</td>               
-                                          <td><a href="supprimer_art.php?code=<?php echo $reponse["titre"];?> " >  <button class="btn btn-warning btn-circle btn-lg"> <i class="fa fa-times"></i></button><?php //echo ?></a></td>
+                                          <td><a href="modifier_art.php?code=<?php echo $reponse["id_article"];?>" > <button class="btn btn-info btn-circle btn-lg"> <i class="fa fa-check">    </i></button></a></td>
+                                        
+                                          <td><a  href="supprimer_art.php?code=<?php echo $reponse["id_article"]; ?>" ><button class="btn btn-warning btn-circle btn-lg" > <i class="fa fa-times" onclick="return confirm('Voulez-vous vraiment supprimer!!!')" ></i></button></a></td>
+                                    
                                         </tr>
                                       <?php 
                      $i++;                  
@@ -213,6 +218,8 @@ require("connexion.php");
                                         
                                     </tbody>
                                 </table>
+
+
                             </div>
                             <!-- /.table-responsive -->
                             
@@ -263,6 +270,8 @@ require("connexion.php");
                 responsive: true
         });
     });
+
+
     </script>
 
    
@@ -270,3 +279,13 @@ require("connexion.php");
 </body>
 
 </html>
+<?php
+}
+else
+{
+header('location:index.html');
+
+}
+
+?>
+=
